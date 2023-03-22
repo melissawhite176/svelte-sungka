@@ -1,5 +1,28 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
+
+	function setupGame() {
+		let board = [7, 7, 7, 7, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 7, 0];
+
+		let p1 = board.slice(0, 8);
+
+		let p2 = board.slice(8, 16);
+
+		let randomPlayer = Number(Math.random() < 0.5 ? 1 : 2);
+
+		return { board, p1, p2, randomPlayer };
+	}
+
+	function play() {
+		console.log('game started');
+		let { board, p1, p2, randomPlayer } = setupGame();
+		let boxSelect = prompt(`Player ${randomPlayer} Choose a box from 1 through 7: `, '1');
+
+		if (boxSelect != null) {
+			let elementSelect = Number(boxSelect) - 1;
+			console.log(elementSelect);
+		}
+	}
 </script>
 
 <h1>Sungka</h1>
@@ -23,7 +46,7 @@
 	<div class="item">16</div>
 </div>
 
-<Button>Start</Button>
+<Button on:click={play}>Start</Button>
 
 <style>
 	.grid-container {
